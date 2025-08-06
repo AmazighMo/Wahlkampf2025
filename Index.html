@@ -1,0 +1,201 @@
+<!--
+Single-file Wahlkampf-Seite: index.html
+Professionell, modern, responsive, mit integriertem CSS & JS.
+README:
+1. Platziere Deine Videodatei (z. B. VoteVid.mp4) im gleichen Ordner wie diese index.html.
+2. Ersetze im <video>-Tag das Attribut src mit dem relativen Dateinamen, z.B. src="VoteVid.mp4".
+-->
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Die Abtrünnigen – Wahlkampf</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ========================
+       DESIGN & STYLE
+       ======================== */
+    :root {
+      --color-midnight: #020832;
+      --color-lime: #A5FF00;
+      --color-text: #D8D8D8;
+      --color-white: #FFFFFF;
+      --font-heading: 'Bebas Neue', cursive;
+      --font-body: 'Inter', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-midnight);
+      overflow-x: hidden;
+    }
+    h1, h2 { font-family: var(--font-heading); color: var(--color-white); }
+
+    /* Hero Section */
+    #hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+    }
+    #heroVideo {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: brightness(0.7);
+    }
+    .overlay {
+      position: absolute;
+      top: 75%; /* weiter unten im Bild */
+      left: 50%; transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(20px);
+      text-align: center;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 0 30px var(--color-lime);
+    }
+    .overlay h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+    .overlay button {
+      font-size: 1.25rem;
+      padding: 0.75rem 2rem;
+      background: var(--color-lime);
+      color: var(--color-midnight);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Sections */
+    .section { padding: 4rem 1rem; }
+    .section .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .section:nth-of-type(even) .text { order: 2; }
+    .section:nth-of-type(even) .image { order: 1; }
+    .text { flex: 1 1 400px; }
+    .text h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .text p { font-size: 1.1rem; line-height: 1.6; color: var(--color-text); }
+    .image {
+      flex: 1 1 300px;
+      height: 200px;
+      background: rgba(255,255,255,0.02);
+      border-radius: 8px;
+    }
+
+    /* CTA */
+    #cta { padding: 4rem 1rem; text-align: center; }
+    #cta .card {
+      display: inline-block;
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(20px);
+      padding: 3rem 4rem;
+      border-radius: 12px;
+      box-shadow: 0 0 30px var(--color-lime);
+    }
+    #cta .card h2 { font-size: 3rem; margin-bottom: 1.5rem; }
+    #cta .card button {
+      font-size: 1.25rem;
+      padding: 1rem 2rem;
+      background: var(--color-lime);
+      color: var(--color-midnight);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 0.9rem;
+      color: var(--color-text);
+    }
+
+    /* Responsive */
+    @media (max-width: 767px) {
+      .overlay h1 { font-size: 2.5rem; }
+      .text h2 { font-size: 2rem; }
+      .overlay { top: 70%; }
+    }
+    @media (min-width: 768px) {
+      .section .container { flex-wrap: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero mit Autoplay-Video -->
+  <section id="hero">
+    <video id="heroVideo" src="VoteVid.mp4" muted loop autoplay playsinline></video>
+    <div class="overlay">
+      <h1>Die Abtrünnigen</h1>
+      <button id="btnVote">Jetzt BR wählen</button>
+    </div>
+  </section>
+
+  <!-- Info-Sektionen -->
+  <section class="section" id="who">
+    <div class="container">
+      <div class="text">
+        <h2>Wer wir sind</h2>
+        <p>Erfahrene Betriebsräte aus Produktion, Labor und IT – vereint für Eure Interessen.</p>
+      </div>
+      <div class="image"><!-- Icon/SVG hier einfügen --></div>
+    </div>
+  </section>
+
+  <section class="section" id="what">
+    <div class="container">
+      <div class="image"><!-- Icon/SVG hier einfügen --></div>
+      <div class="text">
+        <h2>Was wir tun</h2>
+        <p>Wir analysieren Probleme, entwickeln Strategien und setzen uns mit Sachverstand für Euch ein.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="why">
+    <div class="container">
+      <div class="text">
+        <h2>Warum Deine Stimme zählt</h2>
+        <p>Nur mit einer starken Vertretung lassen sich faire Bedingungen und echte Veränderungen erreichen.</p>
+      </div>
+      <div class="image"><!-- Icon/SVG hier einfügen --></div>
+    </div>
+  </section>
+
+  <!-- Call-to-Action -->
+  <section id="cta">
+    <div class="card">
+      <h2>Wählt die Abtrünnigen</h2>
+      <button id="ctaBtn">Zur Wahlurne</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>&copy; 2025 Die Abtrünnigen</footer>
+
+  <!-- Integriertes JavaScript -->
+  <script>
+    // Smooth scroll with slightly reduced offset for main button
+    document.getElementById('btnVote').addEventListener('click', () => {
+      window.scrollBy({ top: window.innerHeight * 0.7, behavior: 'smooth' });
+    });
+    // CTA button scrolls double the previous amount (for quick nav)
+    document.getElementById('ctaBtn').addEventListener('click', () => {
+      window.scrollBy({ top: window.innerHeight * 0.4, behavior: 'smooth' });
+    });
+    // Autoplay-Fallback für Mobile
+    document.body.addEventListener('touchstart', () => {
+      const vid = document.getElementById('heroVideo');
+      if (vid.paused) vid.play();
+    });
+  </script>
+</body>
+</html>
