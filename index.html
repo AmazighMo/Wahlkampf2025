@@ -2,7 +2,7 @@
 Single-file Wahlkampf-Seite: index.html
 Professionell, modern, responsive, mit integriertem CSS & JS.
 README:
-1. Platziere Deine Videodatei (z. B. VoteVid.mp4) im gleichen Ordner wie diese index.html.
+1. Platziere Deine Videodatei (z. B. VoteVid.mp4) und ein Vorschaubild (z. B. poster.jpg) im gleichen Ordner wie diese index.html.
 2. Ersetze im <video>-Tag das Attribut src mit dem relativen Dateinamen, z.B. src="VoteVid.mp4".
 -->
 
@@ -35,20 +35,60 @@ README:
     }
     h1, h2 { font-family: var(--font-heading); color: var(--color-white); }
 
-    /* Hero Section */
+    /* Hero & Video */
     #hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+    .video-container {
       position: relative;
-      height: 100vh;
       width: 100%;
+      max-width: 800px;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0 auto;
     }
-    #heroVideo {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: brightness(0.7);
+    .video-container video,
+    .video-container img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
+    .video-container video {
+      display: none;
+    }
+    .video-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    .video-placeholder button {
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+      background: var(--color-lime);
+      color: var(--color-midnight);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* Overlay-Text & Scroll-Button */
     .overlay {
       position: absolute;
-      top: 75%; /* weiter unten im Bild */
-      left: 50%; transform: translate(-50%, -50%);
+      top: 75%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background: rgba(255,255,255,0.02);
       backdrop-filter: blur(20px);
       text-align: center;
@@ -124,18 +164,46 @@ README:
       .text h2 { font-size: 2rem; }
       .overlay { top: 70%; }
     }
+    @media (orientation: portrait) and (max-width: 600px) {
+      .video-container {
+        max-width: 320px;
+        height: auto;
+      }
+      .video-container video,
+      .video-container img {
+        height: auto;
+      }
+      .overlay {
+        position: static;
+        transform: none;
+        margin: 1rem auto;
+      }
+      .video-placeholder button {
+        font-size: 1.25rem;
+        padding: 0.75rem 1.5rem;
+      }
+    }
     @media (min-width: 768px) {
       .section .container { flex-wrap: nowrap; }
     }
   </style>
 </head>
 <body>
-  <!-- Hero mit Autoplay-Video -->
+  <!-- Hero mit Play-Placeholder -->
   <section id="hero">
-    <video id="heroVideo" src="VoteVid.mp4" muted loop autoplay playsinline></video>
-    <div class="overlay">
-      <h1>Die Abtrünnigen</h1>
-      <button id="btnVote">Jetzt BR wählen</button>
+    <div class="video-container">
+      <!-- Video mit Poster, kein Autoplay, kein Loop, Ton on -->
+      <video id="heroVideo" src="VoteVid.mp4" poster="poster.jpg" controls playsinline></video>
+      <!-- Platzhalter mit Poster und Play-Button -->
+      <div class="video-placeholder" id="video-placeholder">
+        <img src="poster.jpg" alt="Vorschaubild">
+        <button id="play-video-btn">Mehr Infos hier</button>
+      </div>
+      <!-- Overlay-Text und Scroll-Button -->
+      <div class="overlay">
+        <h1>Die Abtrünnigen</h1>
+        <button id="btnVote">Jetzt BR wählen</button>
+      </div>
     </div>
   </section>
 
@@ -183,19 +251,32 @@ README:
 
   <!-- Integriertes JavaScript -->
   <script>
-    // Smooth scroll with slightly reduced offset for main button
+    // Play-Button für Video
+    const video = document.getElementById('heroVideo');
+    const placeholder = document.getElementById('video-placeholder');
+    const playBtn = document.getElementById('play-video-btn');
+
+    playBtn.addEventListener('click', () => {
+      placeholder.style.display = 'none';
+      video.style.display = 'block';
+      video.play();
+    });
+
+    // Beim Video-Ende bleibt letztes Frame stehen (kein Loop)
+    video.addEventListener('ended', () => {});
+
+    // Smooth scroll für Buttons
     document.getElementById('btnVote').addEventListener('click', () => {
       window.scrollBy({ top: window.innerHeight * 0.7, behavior: 'smooth' });
     });
-    // CTA button scrolls double the previous amount (for quick nav)
     document.getElementById('ctaBtn').addEventListener('click', () => {
       window.scrollBy({ top: window.innerHeight * 0.4, behavior: 'smooth' });
     });
-    // Autoplay-Fallback für Mobile
+
+    // Autoplay-Fallback für Mobile (optional)
     document.body.addEventListener('touchstart', () => {
-      const vid = document.getElementById('heroVideo');
-      if (vid.paused) vid.play();
-    });
+      if (video.paused) video.play();
+    }, { once: true });
   </script>
 </body>
 </html>
