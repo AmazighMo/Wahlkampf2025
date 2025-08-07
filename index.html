@@ -34,9 +34,9 @@ README:
     /* Hero & Video */
     #hero {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      padding: 2rem 0;
+      padding: 0;
     }
     .video-container {
       position: relative;
@@ -44,115 +44,81 @@ README:
       max-width: 800px;
       height: calc(100vh - 4rem);
       overflow: hidden;
-      margin: 0 auto;
+      margin: 0;
     }
-    /* Video verstecken bis Klick */
     .video-container video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
+      width: 100%; height: 100%; object-fit: cover; display: none;
     }
-    /* Placeholder mit Posterbild und Overlay-Box */
     .video-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.4);
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.4);
     }
     .video-placeholder img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 1;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; z-index:1;
     }
     .overlay-box {
-      position: relative;
-      z-index: 2;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 2rem 3rem;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 0 20px var(--color-lime);
+      position: relative; z-index:2;
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+      padding: 2rem 3rem; border-radius:12px; text-align:center;
+      box-shadow:0 0 20px var(--color-lime);
     }
     .overlay-box h1 {
-      font-family: var(--font-heading);
-      color: var(--color-white);
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-family: var(--font-heading); color:var(--color-white);
+      font-size:3rem; margin-bottom:1rem;
     }
     .overlay-box button {
-      font-family: var(--font-body);
-      font-size: 1.25rem;
-      padding: 0.75rem 1.5rem;
-      background: var(--color-lime);
-      color: var(--color-midnight);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      font-family: var(--font-body); font-size:1.25rem;
+      padding:0.75rem 1.5rem; background:var(--color-lime);
+      color:var(--color-midnight); border:none; border-radius:8px;
+      cursor:pointer;
     }
 
-    /* Sections */
-    .section { padding: 4rem 1rem; }
+    /* Info direkt unter Hero */
+    #who {
+      width:100%; max-width:800px; background: var(--color-midnight);
+      padding:2rem 1rem;
+      text-align:center;
+    }
+    #who h2 {
+      font-family: var(--font-heading); font-size:2.5rem;
+      color: var(--color-white); margin-bottom:1rem;
+    }
+    #who p {
+      font-family: var(--font-body); font-size:1.1rem;
+      line-height:1.6; color: var(--color-text);
+    }
+
+    /* Remaining Sections */
+    .section { padding:4rem 1rem; }
     .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      align-items: center;
+      max-width:1200px; margin:0 auto;
+      display:flex; flex-wrap:wrap; gap:2rem; align-items:center;
     }
-    .section:nth-of-type(even) .text { order: 2; }
-    .text { flex: 1 1 400px; }
-    .text h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-    .text p { font-size: 1.1rem; line-height: 1.6; color: var(--color-text); }
-    .image {
-      flex: 1 1 300px;
-      height: 200px;
-      background: rgba(255,255,255,0.02);
-      border-radius: 8px;
-    }
+    .section:nth-of-type(even) .text { order:2; }
+    .text { flex:1 1 400px; }
+    .text h2 { font-size:2.5rem; margin-bottom:1rem; }
+    .text p { font-size:1.1rem; line-height:1.6; color:var(--color-text); }
+    .image { flex:1 1 300px; height:200px; background:rgba(255,255,255,0.02); border-radius:8px; }
 
     /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      font-size: 0.9rem;
-      color: var(--color-text);
-    }
+    footer { text-align:center; padding:2rem 0; font-size:0.9rem; color:var(--color-text); }
 
     /* Responsive */
-    @media (max-width: 767px) {
-      .overlay-box h1 { font-size: 2rem; }
-      .overlay-box button { font-size: 1rem; padding: 0.5rem 1rem; }
-      .text h2 { font-size: 2rem; }
+    @media(max-width:767px) {
+      .overlay-box h1{font-size:2rem;} .overlay-box button{font-size:1rem; padding:0.5rem 1rem;} #who h2{font-size:2rem;}
     }
-    @media (orientation: portrait) and (max-width: 600px) {
-      .video-container {
-        max-width: 320px;
-        height: calc(100vh - 4rem);
-      }
-      .video-container video,
-      .video-placeholder img { height: auto; }
-      .overlay-box { padding: 1.5rem 2rem; }
+    @media(orientation:portrait) and (max-width:600px) {
+      .video-container{max-width:320px; height:calc(100vh-4rem);} .overlay-box{padding:1.5rem 2rem;}
     }
-    @media (min-width: 768px) {
-      .container { flex-wrap: nowrap; }
-    }
+    @media(min-width:768px){ .container{flex-wrap:nowrap;} }
   </style>
 </head>
 <body>
-  <!-- Hero mit Overlay-Box -->
   <section id="hero">
     <div class="video-container">
-      <!-- Video mit Poster, versteckt bis Klick -->
       <video id="heroVideo" src="VoteVid.mp4" poster="poster.jpg" controls playsinline></video>
-      <!-- Platzhalter mit Poster und Overlay-Box -->
       <div class="video-placeholder" id="video-placeholder">
         <img src="poster.jpg" alt="Vorschaubild">
         <div class="overlay-box">
@@ -161,22 +127,17 @@ README:
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Info-Sektionen -->
-  <section class="section" id="who">
-    <div class="container">
-      <div class="text">
-        <h2>Wer wir sind</h2>
-        <p>Erfahrene Betriebsräte aus Produktion, Labor und IT – vereint für Eure Interessen.</p>
-      </div>
-      <div class="image"><!-- Icon/SVG hier einfügen --></div>
+    <!-- Info direkt unter Video -->
+    <div id="who">
+      <h2>Wer wir sind</h2>
+      <p>Erfahrene Betriebsräte aus Produktion, Labor und IT – vereint für Eure Interessen.</p>
     </div>
   </section>
 
+  <!-- Weitere Sections -->
   <section class="section" id="what">
     <div class="container">
-      <div class="image"><!-- Icon/SVG hier einfügen --></div>
+      <div class="image"></div>
       <div class="text">
         <h2>Was wir tun</h2>
         <p>Wir analysieren Probleme, entwickeln Strategien und setzen uns mit Sachverstand für Euch ein.</p>
@@ -190,27 +151,19 @@ README:
         <h2>Warum Deine Stimme zählt</h2>
         <p>Nur mit einer starken Vertretung lassen sich faire Bedingungen und echte Veränderungen erreichen.</p>
       </div>
-      <div class="image"><!-- Icon/SVG hier einfügen --></div>
+      <div class="image"></div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>&copy; 2025 Die Abtrünnigen</footer>
 
-  <!-- JavaScript zum Starten des Videos -->
   <script>
-    const video = document.getElementById('heroVideo');
-    const placeholder = document.getElementById('video-placeholder');
-    const playBtn = document.getElementById('play-video-btn');
-
-    playBtn.addEventListener('click', () => {
-      placeholder.style.display = 'none';
-      video.style.display = 'block';
-      video.play();
-    });
-
-    video.addEventListener('ended', () => {});
-    document.body.addEventListener('touchstart', () => { if (video.paused) video.play(); }, { once: true });
+    const video=document.getElementById('heroVideo');
+    const placeholder=document.getElementById('video-placeholder');
+    const playBtn=document.getElementById('play-video-btn');
+    playBtn.addEventListener('click',()=>{placeholder.style.display='none';video.style.display='block';video.play();});
+    video.addEventListener('ended',()=>{});
+    document.body.addEventListener('touchstart',()=>{if(video.paused)video.play();},{once:true});
   </script>
 </body>
 </html>
