@@ -15,9 +15,6 @@ README:
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* ========================
-       DESIGN & STYLE
-       ======================== */
     :root {
       --color-midnight: #020832;
       --color-lime: #A5FF00;
@@ -83,7 +80,7 @@ README:
       cursor: pointer;
     }
 
-    /* Overlay-Text & Scroll-Button */
+    /* Overlay-Text */
     .overlay {
       position: absolute;
       top: 75%;
@@ -96,16 +93,7 @@ README:
       border-radius: 12px;
       box-shadow: 0 0 30px var(--color-lime);
     }
-    .overlay h1 { font-size: 3.5rem; margin-bottom: 1rem; }
-    .overlay button {
-      font-size: 1.25rem;
-      padding: 0.75rem 2rem;
-      background: var(--color-lime);
-      color: var(--color-midnight);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+    .overlay h1 { font-size: 3.5rem; }
 
     /* Sections */
     .section { padding: 4rem 1rem; }
@@ -197,12 +185,11 @@ README:
       <!-- Platzhalter mit Poster und Play-Button -->
       <div class="video-placeholder" id="video-placeholder">
         <img src="poster.jpg" alt="Vorschaubild">
-        <button id="play-video-btn">Mehr Infos hier</button>
+        <button id="play-video-btn">Mehr Infos zu den Abtrünnigen</button>
       </div>
-      <!-- Overlay-Text und Scroll-Button -->
+      <!-- Overlay-Text ohne Button -->
       <div class="overlay">
         <h1>Die Abtrünnigen</h1>
-        <button id="btnVote">Jetzt BR wählen</button>
       </div>
     </div>
   </section>
@@ -249,34 +236,7 @@ README:
   <!-- Footer -->
   <footer>&copy; 2025 Die Abtrünnigen</footer>
 
-  <!-- Integriertes JavaScript -->
-  <script>
-    // Play-Button für Video
-    const video = document.getElementById('heroVideo');
-    const placeholder = document.getElementById('video-placeholder');
-    const playBtn = document.getElementById('play-video-btn');
+  <!-- Integri
 
-    playBtn.addEventListener('click', () => {
-      placeholder.style.display = 'none';
-      video.style.display = 'block';
-      video.play();
-    });
 
-    // Beim Video-Ende bleibt letztes Frame stehen (kein Loop)
-    video.addEventListener('ended', () => {});
 
-    // Smooth scroll für Buttons
-    document.getElementById('btnVote').addEventListener('click', () => {
-      window.scrollBy({ top: window.innerHeight * 0.7, behavior: 'smooth' });
-    });
-    document.getElementById('ctaBtn').addEventListener('click', () => {
-      window.scrollBy({ top: window.innerHeight * 0.4, behavior: 'smooth' });
-    });
-
-    // Autoplay-Fallback für Mobile (optional)
-    document.body.addEventListener('touchstart', () => {
-      if (video.paused) video.play();
-    }, { once: true });
-  </script>
-</body>
-</html>
