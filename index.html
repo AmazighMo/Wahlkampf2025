@@ -97,6 +97,14 @@ README:
     }
     @media (orientation: portrait) and (max-width: 600px) {
       .scroll-btn { display: block; }
+      /* Video-Container height retained to allow overlay positioning */
+      /* .video-container height override removed to keep full-screen coverage */
+      .video-container { max-width: 320px; }
+      .video-container video,
+      .video-placeholder img {
+        height: auto;
+      }
+    }
       .video-container {
         max-width: 320px;
         height: auto;
