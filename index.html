@@ -20,7 +20,6 @@ README:
       --color-lime: #A5FF00;
       --color-text: #D8D8D8;
       --color-white: #FFFFFF;
-      --font-heading: 'Bebas Neue', cursive;
       --font-body: 'Inter', sans-serif;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,12 +29,10 @@ README:
       background: var(--color-midnight);
       overflow-x: hidden;
     }
-    h1, h2 { font-family: var(--font-heading); color: var(--color-white); }
 
     /* Hero & Video */
     #hero {
       display: flex;
-      align-items: center;
       justify-content: center;
       padding: 2rem 0;
     }
@@ -49,7 +46,6 @@ README:
     }
     .video-container video,
     .video-container img {
-      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -59,10 +55,7 @@ README:
     }
     .video-placeholder {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -80,16 +73,15 @@ README:
 
     /* Sections */
     .section { padding: 4rem 1rem; }
-    .section .container {
+    .container {
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
-      align-items: center;
-      gap: 2rem;
       flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
     }
     .section:nth-of-type(even) .text { order: 2; }
-    .section:nth-of-type(even) .image { order: 1; }
     .text { flex: 1 1 400px; }
     .text h2 { font-size: 2.5rem; margin-bottom: 1rem; }
     .text p { font-size: 1.1rem; line-height: 1.6; color: var(--color-text); }
@@ -127,7 +119,7 @@ README:
       }
     }
     @media (min-width: 768px) {
-      .section .container { flex-wrap: nowrap; }
+      .container { flex-wrap: nowrap; }
     }
   </style>
 </head>
@@ -135,9 +127,7 @@ README:
   <!-- Hero mit Play-Placeholder -->
   <section id="hero">
     <div class="video-container">
-      <!-- Video mit Poster, kein Autoplay, kein Loop, Ton on -->
       <video id="heroVideo" src="VoteVid.mp4" poster="poster.jpg" controls playsinline></video>
-      <!-- Platzhalter mit Poster und Play-Button -->
       <div class="video-placeholder" id="video-placeholder">
         <img src="poster.jpg" alt="Vorschaubild">
         <button id="play-video-btn">Mehr Infos zu den Abtrünnigen</button>
@@ -191,13 +181,8 @@ README:
       video.play();
     });
 
-    // Video bleibt beim letzten Frame (kein Loop)
     video.addEventListener('ended', () => {});
-
-    // Mobile Play-Fallback
-    document.body.addEventListener('touchstart', () => {
-      if (video.paused) video.play();
-    }, { once: true });
+    document.body.addEventListener('touchstart', () => { if (video.paused) video.play(); }, { once: true });
   </script>
 </body>
 </html>
