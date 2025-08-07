@@ -20,6 +20,7 @@ README:
       --color-lime: #A5FF00;
       --color-text: #D8D8D8;
       --color-white: #FFFFFF;
+      --font-heading: 'Bebas Neue', cursive;
       --font-body: 'Inter', sans-serif;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,6 +35,7 @@ README:
     #hero {
       display: flex;
       justify-content: center;
+      align-items: center;
       padding: 2rem 0;
     }
     .video-container {
@@ -44,26 +46,50 @@ README:
       overflow: hidden;
       margin: 0 auto;
     }
-    .video-container video,
-    .video-container img {
+    /* Video verstecken bis Klick */
+    .video-container video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-    .video-container video {
       display: none;
     }
+    /* Placeholder mit Posterbild und Overlay-Box */
     .video-placeholder {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.4);
     }
-    .video-placeholder button {
-      font-size: 1.5rem;
-      padding: 1rem 2rem;
+    .video-placeholder img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .overlay-box {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 20px var(--color-lime);
+    }
+    .overlay-box h1 {
+      font-family: var(--font-heading);
+      color: var(--color-white);
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .overlay-box button {
+      font-family: var(--font-body);
+      font-size: 1.25rem;
+      padding: 0.75rem 1.5rem;
       background: var(--color-lime);
       color: var(--color-midnight);
       border: none;
@@ -102,21 +128,15 @@ README:
 
     /* Responsive */
     @media (max-width: 767px) {
+      .overlay-box h1 { font-size: 2rem; }
+      .overlay-box button { font-size: 1rem; padding: 0.5rem 1rem; }
       .text h2 { font-size: 2rem; }
     }
     @media (orientation: portrait) and (max-width: 600px) {
-      .video-container {
-        max-width: 320px;
-        height: auto;
-      }
+      .video-container { max-width: 320px; height: auto; }
       .video-container video,
-      .video-container img {
-        height: auto;
-      }
-      .video-placeholder button {
-        font-size: 1.25rem;
-        padding: 0.75rem 1.5rem;
-      }
+      .video-placeholder img { height: auto; }
+      .overlay-box { padding: 1.5rem 2rem; }
     }
     @media (min-width: 768px) {
       .container { flex-wrap: nowrap; }
@@ -124,13 +144,18 @@ README:
   </style>
 </head>
 <body>
-  <!-- Hero mit Play-Placeholder -->
+  <!-- Hero mit Overlay-Box -->
   <section id="hero">
     <div class="video-container">
+      <!-- Video mit Poster, versteckt bis Klick -->
       <video id="heroVideo" src="VoteVid.mp4" poster="poster.jpg" controls playsinline></video>
+      <!-- Platzhalter mit Poster und Overlay-Box -->
       <div class="video-placeholder" id="video-placeholder">
         <img src="poster.jpg" alt="Vorschaubild">
-        <button id="play-video-btn">Mehr Infos zu den Abtrünnigen</button>
+        <div class="overlay-box">
+          <h1>Die Abtrünnigen</h1>
+          <button id="play-video-btn">Klick für mehr Infos</button>
+        </div>
       </div>
     </div>
   </section>
@@ -169,20 +194,26 @@ README:
   <!-- Footer -->
   <footer>&copy; 2025 Die Abtrünnigen</footer>
 
-  <!-- JavaScript -->
+  <!-- JavaScript zum Starten des Videos -->
   <script>
     const video = document.getElementById('heroVideo');
     const placeholder = document.getElementById('video-placeholder');
     const playBtn = document.getElementById('play-video-btn');
 
     playBtn.addEventListener('click', () => {
+      // Placeholder entfernen, Video anzeigen und abspielen
       placeholder.style.display = 'none';
       video.style.display = 'block';
       video.play();
     });
 
+    // Nach Ende bleibt letztes Frame stehen (kein Loop)
     video.addEventListener('ended', () => {});
-    document.body.addEventListener('touchstart', () => { if (video.paused) video.play(); }, { once: true });
+
+    // Mobile Play-Fallback
+    document.body.addEventListener('touchstart', () => {
+      if (video.paused) video.play();
+    }, { once: true });
   </script>
 </body>
 </html>
