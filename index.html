@@ -25,9 +25,9 @@ README:
     body { font-family:var(--font-body); color:var(--color-text); background:var(--color-midnight); overflow-x:hidden; }
 
     /* Hero & Video */
-    #hero { position:relative; width:100%; height:100vh; overflow:hidden; }
-    .video-container { position:relative; width:100%; height:100%; }
-    .video-container video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; display:none; }
+    #hero { position:relative; width:100%; height:auto; overflow:hidden; }
+    .video-container { position:relative; width:100%; height:auto; }
+    .video-container video { width:100%; height:auto; object-fit:cover; display:none; }
     .video-placeholder { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; }
     .video-placeholder img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
     .overlay-box { position:relative; z-index:2; background:rgba(255,255,255,0.1); backdrop-filter:blur(10px); padding:2rem 3rem; border-radius:12px; text-align:center; box-shadow:0 0 20px var(--color-lime); }
@@ -54,7 +54,17 @@ README:
     footer { text-align:center; padding:2rem 0; color:var(--color-text); }
 
     /* Responsive */
-    @media (max-width:767px) { .overlay-box h1 { font-size:2rem; } .overlay-box button { font-size:1rem; padding:0.5rem 1rem; } #who h2 { font-size:2rem; } }
+    @media (max-width:767px) { .overlay-box h1 { font-size:2rem; }
+    /* Portrait: auto height */
+    @media (orientation: portrait) {
+      #hero, .video-container { height:auto !important; }
+      .video-container video, .video-placeholder { height:auto !important; }
+    }
+    /* Landscape: full height */
+    @media (orientation: landscape) {
+      #hero, .video-container { height:100vh; }
+      .video-container video { height:100%; }
+    } .overlay-box button { font-size:1rem; padding:0.5rem 1rem; } #who h2 { font-size:2rem; } }
   </style>
 </head>
 <body>
