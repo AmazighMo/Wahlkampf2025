@@ -133,7 +133,10 @@ README:
       .text h2 { font-size: 2rem; }
     }
     @media (orientation: portrait) and (max-width: 600px) {
-      .video-container { max-width: 320px; height: auto; }
+      .video-container {
+        max-width: 320px;
+        height: calc(100vh - 4rem);
+      }
       .video-container video,
       .video-placeholder img { height: auto; }
       .overlay-box { padding: 1.5rem 2rem; }
@@ -201,19 +204,13 @@ README:
     const playBtn = document.getElementById('play-video-btn');
 
     playBtn.addEventListener('click', () => {
-      // Placeholder entfernen, Video anzeigen und abspielen
       placeholder.style.display = 'none';
       video.style.display = 'block';
       video.play();
     });
 
-    // Nach Ende bleibt letztes Frame stehen (kein Loop)
     video.addEventListener('ended', () => {});
-
-    // Mobile Play-Fallback
-    document.body.addEventListener('touchstart', () => {
-      if (video.paused) video.play();
-    }, { once: true });
+    document.body.addEventListener('touchstart', () => { if (video.paused) video.play(); }, { once: true });
   </script>
 </body>
 </html>
