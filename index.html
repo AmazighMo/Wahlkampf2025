@@ -37,15 +37,13 @@ README:
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      padding-top: 2rem;
-      padding-bottom: 2rem;
+      padding: 2rem 0;
     }
     .video-container {
       position: relative;
       width: 100%;
       max-width: 800px;
-      height: 100vh;
+      height: calc(100vh - 4rem);
       overflow: hidden;
       margin: 0 auto;
     }
@@ -80,21 +78,6 @@ README:
       cursor: pointer;
     }
 
-    /* Overlay-Text */
-    .overlay {
-      position: absolute;
-      top: 75%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.02);
-      backdrop-filter: blur(20px);
-      text-align: center;
-      padding: 2rem 3rem;
-      border-radius: 12px;
-      box-shadow: 0 0 30px var(--color-lime);
-    }
-    .overlay h1 { font-size: 3.5rem; }
-
     /* Sections */
     .section { padding: 4rem 1rem; }
     .section .container {
@@ -117,27 +100,6 @@ README:
       border-radius: 8px;
     }
 
-    /* CTA */
-    #cta { padding: 4rem 1rem; text-align: center; }
-    #cta .card {
-      display: inline-block;
-      background: rgba(255,255,255,0.02);
-      backdrop-filter: blur(20px);
-      padding: 3rem 4rem;
-      border-radius: 12px;
-      box-shadow: 0 0 30px var(--color-lime);
-    }
-    #cta .card h2 { font-size: 3rem; margin-bottom: 1.5rem; }
-    #cta .card button {
-      font-size: 1.25rem;
-      padding: 1rem 2rem;
-      background: var(--color-lime);
-      color: var(--color-midnight);
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
     /* Footer */
     footer {
       text-align: center;
@@ -148,9 +110,7 @@ README:
 
     /* Responsive */
     @media (max-width: 767px) {
-      .overlay h1 { font-size: 2.5rem; }
       .text h2 { font-size: 2rem; }
-      .overlay { top: 70%; }
     }
     @media (orientation: portrait) and (max-width: 600px) {
       .video-container {
@@ -160,11 +120,6 @@ README:
       .video-container video,
       .video-container img {
         height: auto;
-      }
-      .overlay {
-        position: static;
-        transform: none;
-        margin: 1rem auto;
       }
       .video-placeholder button {
         font-size: 1.25rem;
@@ -186,10 +141,6 @@ README:
       <div class="video-placeholder" id="video-placeholder">
         <img src="poster.jpg" alt="Vorschaubild">
         <button id="play-video-btn">Mehr Infos zu den Abtrünnigen</button>
-      </div>
-      <!-- Overlay-Text ohne Button -->
-      <div class="overlay">
-        <h1>Die Abtrünnigen</h1>
       </div>
     </div>
   </section>
@@ -225,18 +176,28 @@ README:
     </div>
   </section>
 
-  <!-- Call-to-Action -->
-  <section id="cta">
-    <div class="card">
-      <h2>Wählt die Abtrünnigen</h2>
-      <button id="ctaBtn">Zur Wahlurne</button>
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer>&copy; 2025 Die Abtrünnigen</footer>
 
-  <!-- Integri
+  <!-- JavaScript -->
+  <script>
+    const video = document.getElementById('heroVideo');
+    const placeholder = document.getElementById('video-placeholder');
+    const playBtn = document.getElementById('play-video-btn');
 
+    playBtn.addEventListener('click', () => {
+      placeholder.style.display = 'none';
+      video.style.display = 'block';
+      video.play();
+    });
 
+    // Video bleibt beim letzten Frame (kein Loop)
+    video.addEventListener('ended', () => {});
 
+    // Mobile Play-Fallback
+    document.body.addEventListener('touchstart', () => {
+      if (video.paused) video.play();
+    }, { once: true });
+  </script>
+</body>
+</html>
