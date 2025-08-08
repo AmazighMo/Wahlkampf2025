@@ -1,0 +1,165 @@
+/*
+ * Grundlegendes Stylesheet für die Betriebsratswahl‑Homepage.
+ * Dieses Stylesheet sorgt für eine aufgeräumte, moderne Optik und passt
+ * sich responsiv an verschiedene Bildschirmformate an. Die Farben und
+ * Schriften werden über CSS‑Variablen definiert, sodass Änderungen
+ * zentral vorgenommen werden können.
+ */
+
+:root {
+  /* Farbpalette */
+  --primary: #2d5eff;
+  --accent: #4ce17f;
+  --background: #f8faff;
+  --text-color: #333333;
+  --card-bg: #ffffff;
+  --border-radius: 8px;
+}
+
+/* Grundlayout */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Open Sans', 'Roboto', sans-serif;
+  background-color: var(--background);
+  color: var(--text-color);
+  scroll-behavior: smooth;
+}
+
+main {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+}
+
+/* Videoabschnitt */
+.video-section {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.hero-video {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  display: block;
+  object-fit: cover;
+  background-color: #000;
+}
+
+.intro-text {
+  padding: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.intro-text p {
+  margin-bottom: 0.8rem;
+}
+
+/* Überschriften */
+h2 {
+  color: var(--primary);
+  font-size: 1.6rem;
+  margin: 2rem 0 1rem;
+  line-height: 1.2;
+}
+
+/* Abschnitt allgemeine Texte */
+section p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+}
+
+/* Akkordeon generisch */
+.accordion {
+  background-color: var(--card-bg);
+  border: 1px solid var(--primary);
+  border-radius: var(--border-radius);
+  margin: 0.8rem 0;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+  color: var(--primary);
+  background-color: var(--card-bg);
+  transition: background-color 0.3s ease;
+}
+
+.accordion-header img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 0.8rem;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.accordion-header:hover {
+  background-color: #eef3ff;
+}
+
+.accordion.open .accordion-header {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  background-color: var(--card-bg);
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  padding: 0 1rem;
+}
+
+.accordion.open .accordion-body {
+  max-height: 500px;
+  padding: 0.8rem 1rem;
+}
+
+.accordion-body p {
+  margin: 0.4rem 0;
+}
+
+/* Fade‑In / Slide‑In beim Scrollen */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive Anpassungen */
+@media (min-width: 768px) {
+  main {
+    max-width: 900px;
+    padding: 0 2rem 4rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  .intro-text {
+    font-size: 1.1rem;
+  }
+  section p {
+    font-size: 1.05rem;
+  }
+  .accordion-header img {
+    width: 60px;
+    height: 60px;
+  }
+}
